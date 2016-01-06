@@ -7,6 +7,7 @@ module HaloPays
     def connection
       url = Rails.application.secrets.halopays['api_url']
       conn = Faraday.new(url: url) do |c|
+        # TODO: Replace below with config stuff
         # c.headers['Authorization']# = "#{Rails.application.secrets.halopays['api']['private_key']}:x"
         c.basic_auth Rails.application.secrets.halopays['merchant_key']['private'], 'x'
         c.headers['Accept'] = 'application/com.halopays.api-v1+json'

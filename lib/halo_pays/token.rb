@@ -30,8 +30,8 @@ module HaloPays
         JSON.parse response.body
       end
 
-      def activate payment_payload, billing_contact_payload
-        response = HaloPays.connection.post "/merchants/#{charity_merchant_id}/transactions/", {
+      def activate merchant_id, payment_payload, billing_contact_payload
+        response = HaloPays.connection.post "/merchants/#{merchant_id}/transactions/", {
           test:            Rails.env.development?,
           trans_type:      'DONATION',
           amount:          000,
