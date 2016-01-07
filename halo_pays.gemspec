@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Derek Montgomery"]
   spec.email         = ["montgomerygraphics@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = "A Ruby gem for the HaloPays payment API"
+  # spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage      = "http://halopays.com/"
   spec.license       = "MIT"
 
