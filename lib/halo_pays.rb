@@ -1,9 +1,20 @@
+# gem dependency
 require 'hashie'
 require 'faraday'
 require 'faraday_middleware'
 
+# config
+require 'halopays/version'
+
+# models
+require 'halopays/models/application'
+require 'halopays/models/merchant'
+require 'halopays/models/token'
+require 'halopays/models/transaction'
+
 module HaloPays
   class << self
+    # TODO: Extract this to a HaloPays::Connection config file
     def connection
       url = Rails.application.secrets.halopays['api_url']
       conn = Faraday.new(url: url) do |c|

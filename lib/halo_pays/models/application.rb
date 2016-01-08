@@ -12,14 +12,11 @@ module HaloPays
         JSON.parse response.body
       end
 
-      def submit legal_entity_json, merchant_json
-        response = HaloPays.connection.post "/applications/", {
-          agree_tc: true,
-          agree_ip: '127.0.0.1',
-          test: Rails.env.development?,
-          legal_entity: legal_entity_json,
-          merchant: merchant_json
-        }
+      def submit application_object
+        response = HaloPays.connection.post '/applications/', application_object
+
+        binding.pry
+
         JSON.parse response.body
       end
     end
