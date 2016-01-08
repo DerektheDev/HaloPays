@@ -4,13 +4,13 @@ require 'faraday'
 require 'faraday_middleware'
 
 # config
-require 'halopays/version'
+require 'halo_pays/version'
 
 # models
-require 'halopays/models/application'
-require 'halopays/models/merchant'
-require 'halopays/models/token'
-require 'halopays/models/transaction'
+require 'halo_pays/models/application'
+require 'halo_pays/models/merchant'
+require 'halo_pays/models/token'
+require 'halo_pays/models/transaction'
 
 module HaloPays
   class << self
