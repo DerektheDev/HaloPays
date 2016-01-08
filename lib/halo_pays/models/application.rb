@@ -13,7 +13,7 @@ module HaloPays
       end
 
       def submit application_object
-        response = HaloPays.connection.post '/applications/', application_object
+        response = HaloPays.connection.post "/applications/", URI.encode_www_form(application_object)
 
         binding.pry
 
