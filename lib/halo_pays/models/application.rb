@@ -13,9 +13,8 @@ module HaloPays
       end
 
       def submit application_object
-        response = HaloPays.connection.post "/applications/", URI.encode_www_form(application_object)
-
-        binding.pry
+        # TODO: Finish this! Error with how I'm passing it...
+        response = HaloPays.connection.post '/applications/', URI.encode_www_form(application_object)
 
         JSON.parse response.body
       end
