@@ -9,7 +9,7 @@ module HaloPays
       conn = Faraday.new(url: url) do |c|
         # TODO: Replace below with config stuff
         # c.headers['Authorization']# = "#{Rails.application.secrets.halopays['api']['private_key']}:x"
-        c.basic_auth Rails.application.secrets.halopays['merchant_key']['private'], 'x'
+        c.basic_auth Rails.application.secrets.halopays['partner_key']['private'], 'x'
         c.headers['Accept'] = 'application/com.halopays.api-v1+json'
         c.headers['Content-Type'] = 'application/com.halopays.api-v1+json'
         # c.request  :url_encoded
