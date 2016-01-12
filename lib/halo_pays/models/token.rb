@@ -30,18 +30,18 @@ module HaloPays
         JSON.parse response.body
       end
 
-      def activate merchant_id, payment_payload, billing_contact_payload
-        response = HaloPays.connection.post "/merchants/#{merchant_id}/transactions/", {
+      def activate opts
+        response = HaloPays.connection.post "/merchants/#{opts[:merchant_id]}/transactions/", {
           test:            Rails.env.development?,
           trans_type:      'DONATION',
           amount:          000,
           # order_id
           order_source:    'ONLINE',
-          remote_ip:       '127.0.0.1',
+          remote_ip:       opts[:remote_ip],
           description:     'Good Cents Account Activation ($0.00)',
           email_receipt:   false,
-          payment:         payment_payload,
-          billing_contact: billing_contact_payload
+          payment:         opts[:payment],
+          billing_contact: opts[:billing_info]
         }
         JSON.parse response.body
       end
