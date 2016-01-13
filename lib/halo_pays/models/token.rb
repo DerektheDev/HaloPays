@@ -34,20 +34,25 @@ module HaloPays
       end
 
       def activate opts
-        response = HaloPays.connection.post "/merchants/#{opts[:merchant_id]}/transactions/", {
+
+        activate_payload = {
           test:            true,
           trans_type:      'DONATION',
-          status:          'AUTHORIZED',
+          status:          'CAPTURED',
           order_id:        'some-order-id',
           amount:          000,
           order_source:    'ONLINE',
           remote_ip:       opts[:remote_ip],
           description:     'Good Cents Account Activation ($0.00)',
           email_receipt:   false,
-          payment:         opts[:payment].to_json,
-          billing_contact: opts[:billing_info].to_json
+          payment:         opts[:payment],
+          billing_contact: opts[:billing_info]
         }.to_json
-        response.body
+
+        binding.pry
+
+        # response = HaloPays.connection.post "/merchants/#{opts[:merchant_id]}/transactions/", activate_payload
+        # response.body
       end
 
       def delete token
