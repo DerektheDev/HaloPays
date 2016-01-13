@@ -3,12 +3,15 @@ module HaloPays
   
     class << self
       def create_for_ach account_number
-        response = HaloPays.connection.post '/tokens/', {
+        token_payload = {
           test: Rails.env.development?,
           pay_type: 'ACH',
           ach_account: account_number
-        }
-        JSON.parse response.body
+        }.to_json
+
+        response = HaloPays.token_connection.post '/tokens/', token_payload
+
+        response.body
       end
 
       def create_for_card card_number
@@ -16,7 +19,7 @@ module HaloPays
           test: Rails.env.development?,
           pay_type: 'CARD',
           card_number: card_number
-        }
+        }.to_json
         JSON.parse response.body
       end
 
@@ -32,18 +35,19 @@ module HaloPays
 
       def activate opts
         response = HaloPays.connection.post "/merchants/#{opts[:merchant_id]}/transactions/", {
-          test:            Rails.env.development?,
+          test:            true,
           trans_type:      'DONATION',
+          status:          'AUTHORIZED',
+          order_id:        'some-order-id',
           amount:          000,
-          # order_id
           order_source:    'ONLINE',
           remote_ip:       opts[:remote_ip],
           description:     'Good Cents Account Activation ($0.00)',
           email_receipt:   false,
-          payment:         opts[:payment],
-          billing_contact: opts[:billing_info]
-        }
-        JSON.parse response.body
+          payment:         opts[:payment].to_json,
+          billing_contact: opts[:billing_info].to_json
+        }.to_json
+        response.body
       end
 
       def delete token
