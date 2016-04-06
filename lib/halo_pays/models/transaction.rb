@@ -14,7 +14,7 @@ module HaloPays
           test:            Rails.env.development?,
           trans_type:      'DONATION',
           status:          status,
-          order_id:        SecureRandom.hex,
+          order_id:        opts[:order_id],
           amount:          amount,
           order_source:    'ONLINE',
           remote_ip:       opts[:remote_ip],
