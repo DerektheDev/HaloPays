@@ -33,5 +33,11 @@ module HaloPays
       end
     end
 
+    def cancel_recurring merchant_id, order_id
+      # should return 204
+      response = HaloPays.connection.delete "/merchants/#{merchant_id}/recurring/#{order_id}", payment_payload
+      response.body
+    end
+
   end
 end
