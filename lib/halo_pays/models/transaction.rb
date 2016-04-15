@@ -22,7 +22,11 @@ module HaloPays
           email_receipt:   false,
           payment:         opts[:payment],
           billing_contact: opts[:billing_info]
-        }.to_json
+        }
+
+        payment_payload.merge!(opts[:recurring]) if opts[:recurring].present?
+
+        payment_payload = payment_payload.to_json
 
         response = HaloPays.connection.post "/merchants/#{opts[:merchant_id]}/transactions/", payment_payload
         response.body
