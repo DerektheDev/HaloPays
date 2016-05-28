@@ -25,7 +25,7 @@ module HaloPays
         # config.request  :url_encoded
         # config.use FaradayMiddleware::ParseJson,       content_type: 'application/json'
         config.use FaradayMiddleware::Mashify
-        config.use Faraday::Response::RaiseError       # raise exceptions on 40x, 50x responses
+        # config.use Faraday::Response::RaiseError       # raise exceptions on 40x, 50x responses
         # config.request :json
         config.response :json
         config.adapter  Faraday.default_adapter        # make requests with Net::HTTP
@@ -38,7 +38,7 @@ module HaloPays
         config.headers['Accept'] = 'application/com.halopays.api-v1+json'
         config.headers['Content-Type'] = 'application/com.halopays.api-v1+json'
         config.use FaradayMiddleware::Mashify
-        config.use Faraday::Response::RaiseError
+        # config.use Faraday::Response::RaiseError
         config.adapter Faraday.default_adapter
       end
     end
