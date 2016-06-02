@@ -11,7 +11,7 @@ module HaloPays
         end
 
         payment_payload = {
-          test:            Rails.env.development?,
+          test:            opts[:test],
           trans_type:      'DONATION',
           status:          status,
           order_id:        opts[:order_id],
@@ -25,7 +25,6 @@ module HaloPays
         }
 
         payment_payload.merge!(opts[:recurring]) if opts[:recurring].present?
-
         payment_payload = payment_payload.to_json
 
         response = HaloPays.connection.post "/merchants/#{opts[:merchant_id]}/transactions/", payment_payload
