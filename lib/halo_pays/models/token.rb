@@ -1,6 +1,6 @@
 module HaloPays
   module Token
-  
+
     class << self
       def create_for_ach account_number
         token_payload = {
@@ -26,7 +26,11 @@ module HaloPays
 
       def view token
         response = HaloPays.connection.get "/tokens/#{token}"
-        JSON.parse response.body
+        unless response.body.has_key? 'errors'
+          response.body
+        else
+          nil
+        end
       end
 
       def view_all
@@ -40,7 +44,7 @@ module HaloPays
         when 'CARD'
           status, amount = 'AUTHORIZED', 0
         when 'ACH'
-          status, amount = 'CAPTURED', 100 # TODO: HP will fix this to accept 0 on both
+          status, amount = 'CAPTURED', 0 # TODO: HP will fix this to accept 0 on both
         end
 
         activate_payload = {
