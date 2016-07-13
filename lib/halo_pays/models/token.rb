@@ -2,22 +2,22 @@ module HaloPays
   module Token
 
     class << self
-      def create_for_ach account_number
+      def create_for_ach opts
         token_payload = {
-          test: true,
+          test: opts[:test],
           pay_type: 'ACH',
-          ach_account: account_number
+          ach_account: opts[:account_number]
         }.to_json
 
         response = HaloPays.token_connection.post '/tokens/', token_payload
         response.body
       end
 
-      def create_for_card card_number
+      def create_for_card opts
         token_payload = {
-          test: true,
+          test: opts[:test],
           pay_type: 'CARD',
-          card_number: card_number
+          card_number: opts[:card_number]
         }.to_json
 
         response = HaloPays.token_connection.post '/tokens/', token_payload
@@ -48,7 +48,7 @@ module HaloPays
         end
 
         activate_payload = {
-          test:            true,
+          test:            opts[:test],
           trans_type:      'DONATION',
           status:          status,
           order_id:        'some-order-id',
