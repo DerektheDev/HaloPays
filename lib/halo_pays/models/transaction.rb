@@ -15,7 +15,7 @@ module HaloPays
           trans_type:      'DONATION',
           status:          status,
           order_id:        opts[:order_id],
-          amount:          opts[:amount].to_i,
+          amount:          opts[:amount],
           order_source:    'ONLINE',
           remote_ip:       opts[:remote_ip],
           description:     'Good Cents',
