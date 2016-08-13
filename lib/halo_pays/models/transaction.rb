@@ -3,17 +3,12 @@ module HaloPays
     class << self
 
       def post opts
-        status = case opts[:payment][:pay_type]
-        when 'CARD' then 'AUTHORIZED'
-        when 'ACH' then 'CAPTURED'
-        end
-
         amount = opts[:test] ? 0 : opts[:payment][:amount]
 
         payment_payload = {
           test:            opts[:test],
           trans_type:      'DONATION',
-          status:          status,
+          status:          'CAPTURED',
           order_id:        opts[:order_id],
           amount:          opts[:amount],
           order_source:    'ONLINE',
