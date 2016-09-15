@@ -44,7 +44,7 @@ module HaloPays
         when 'CARD'
           status, amount = 'AUTHORIZED', 0
         when 'ACH'
-          status, amount = 'CAPTURED', 0 # TODO: HP will fix this to accept 0 on both
+          status, amount = 'CAPTURED', 0
         end
 
         activate_payload = {
@@ -67,7 +67,8 @@ module HaloPays
       end
 
       def delete token
-
+        response = HaloPays.connection.delete "/token/#{token}"
+        response.body
       end
 
     end
