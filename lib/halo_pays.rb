@@ -47,7 +47,7 @@ module HaloPays
 
     def round_up_connection
       conn = Faraday.new(url: 'https://api.halopays.com') do |config|
-        config.basic_auth Rails.application.secrets.halopays['round_up_partner_key']['private'], 'x'
+        config.basic_auth Rails.application.secrets.halopays['round_up_key']['private'], 'x'
         config.headers['Accept'] = 'application/com.halopays.api-v1+json'
         config.headers['Content-Type'] = 'application/com.halopays.api-v1+json'
         config.use FaradayMiddleware::Mashify
@@ -58,7 +58,7 @@ module HaloPays
 
     def round_up_token_connection
       conn = Faraday.new(url: 'https://api.halopays.com') do |config|
-        config.basic_auth Rails.application.secrets.halopays['round_up_partner_key']['public'], 'x'
+        config.basic_auth Rails.application.secrets.halopays['round_up_key']['public'], 'x'
         config.headers['Accept'] = 'application/com.halopays.api-v1+json'
         config.headers['Content-Type'] = 'application/com.halopays.api-v1+json'
         config.use FaradayMiddleware::Mashify
